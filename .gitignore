@@ -1,0 +1,18 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+.npm
+
+# .volumes
+.volumes
+
+# MacOS and VSCode settings
+.DS_Store
+.vscode
+
+# Raw documentation files
+*.drawio
