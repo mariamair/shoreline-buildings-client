@@ -1,4 +1,11 @@
+/**
+ * Defines the layout for the home page.
+ * 
+ * @author Maria Mair <mm225mz@student.lnu.se>
+ */
+
 import { Geist, Geist_Mono } from 'next/font/google'
+import Footer from '@/components/Footer'
 import './globals.css'
 
 const geistSans = Geist({
@@ -19,7 +26,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }
