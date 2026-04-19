@@ -1,24 +1,23 @@
 :root {
   --color-primary: #062509;
-  --color-secondary-light-green: #c2f1b3;
   --color-secondary-white: #f8fcf7;
+  --color-secondary-light-green: #c2f1b3;
   --color-secondary-light-grey: #d6f4cc;
   --color-secondary-olive-green: #59764f;
-  --color-secondary-dark-green: #08b57b;
   --color-red: #ff7f50;
   --color-secondary-indigo: #206cb9;
   
   --background: var(--color-primary);
+  --background-secondary: var(--color-secondary-light-green);
   --foreground: var(--color-secondary-white);
   --warning: var(--color-red);
 
-  --text-primary: var(--color-secondary-light-green);
-  --text-secondary-white: var(--color-secondary-white);
-  --text-secondary-02: var(--color-secondary-olive-green);
-  --text-secondary-03: var(--color-secondary-dark-green);
-  --text-secondary-04: var(--color-secondary-indigo);
-  --text-secondary-05: var(--color-secondary-light-grey);
-  --text-dark-on-light: var(--color-primary);
+  --text-primary: var(--color-secondary-white);
+  --text-highlight: var(--color-secondary-light-green);
+  --text-dark: var(--color-primary);
+
+  --text-indigo: var(--color-secondary-indigo);
+  --text-light-grey: var(--color-secondary-light-grey);
 
   --button: var(--color-secondary-light-grey);
   --button-primary-hover: #383838;
@@ -37,11 +36,11 @@ body {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: var(--background);
-  color: var(--text-secondary-white);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -61,7 +60,7 @@ a {
 
 button {
   background: var(--button);
-  color: var(--text-dark-on-light);
+  color: var(--text-dark);
   font-size: 1rem;
   padding: 0.2rem;
   border-radius: 0.3rem;
@@ -69,4 +68,11 @@ button {
 
 .warning {
   color: var(--warning);
+}
+
+footer {
+  background-color: var(--background-secondary);
+  color: var(--text-dark);
+  text-align: center;
+  padding: 0.8rem;
 }
