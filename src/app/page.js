@@ -1,3 +1,8 @@
+/**
+ * Defines the home page.
+ * 
+ * @author Maria Mair <mm225mz@student.lnu.se>
+ */
 
 import { SignInButton } from '@/components/authbuttons'
 import styles from './page.module.css'

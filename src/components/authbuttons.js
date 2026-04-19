@@ -1,3 +1,9 @@
+/**
+ * Defines the sign in and sign out button.
+ * 
+ * @author Maria Mair <mm225mz@student.lnu.se>
+ */
+
 import { signIn, signOut } from '@/auth'
 
 export function SignInButton() {
