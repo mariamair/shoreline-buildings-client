@@ -1,4 +1,4 @@
-import Image from 'next/image'
+
 import { SignInButton } from '@/components/authbuttons'
 import styles from './page.module.css'
 
