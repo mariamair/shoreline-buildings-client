@@ -5,7 +5,7 @@
  */
 
 import styles from './page.module.css'
-import RegionMap from './components/map/RegionMap.js'
+import RegionMap from './components/maps/RegionMap.js'
 
 export default async function Dashboard() {
   return (
