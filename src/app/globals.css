@@ -4,6 +4,7 @@
   --color-secondary-light-green: #c2f1b3;
   --color-secondary-light-grey: #d6f4cc;
   --color-secondary-olive-green: #59764f;
+  --color-apricot: #f4a261;
   --color-red: #ff7f50;
   --color-secondary-indigo: #206cb9;
   
@@ -11,6 +12,9 @@
   --background-secondary: var(--color-secondary-light-green);
   --foreground: var(--color-secondary-white);
   --warning: var(--color-red);
+  --map-highlight: var(--color-apricot);
+  --map-range-low: var(--color-secondary-light-green);
+  --map-range-high: var(--color-red);
 
   --text-primary: var(--color-secondary-white);
   --text-highlight: var(--color-secondary-light-green);
@@ -54,8 +58,7 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--text-highlight);
 }
 
 button {
