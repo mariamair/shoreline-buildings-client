@@ -1,0 +1,62 @@
+/**
+ * Contains the GraphQL queries.
+ *
+ * @author Maria Mair <mm225mz@student.lnu.se>
+ */
+
+export const BUILDING_COUNT_QUERY = `
+query BuildingCountEntitiesWithFilters (
+  $regionCode: String,
+  $regionTypeId: Int,
+  $year: Int,
+  $areaTypeId: Int,
+  $buildingTypeId: Int,
+  $shorelineTypeId: Int,
+  $limit: Int,
+  $offset: Int) {
+  buildingCountEntities(
+    filter: {
+    regionCode: $regionCode,
+    regionTypeId: $regionTypeId, 
+    year: $year, 
+    areaTypeId: $areaTypeId, 
+    buildingTypeId: $buildingTypeId, 
+    shorelineTypeId: $shorelineTypeId
+    }
+    limit: $limit
+    offset: $offset
+  ) {
+    totalCount
+    limit
+    offset
+    hasNextPage
+    items {
+      id
+      region {
+        code
+        name
+        regionType {
+          id
+          name
+        }
+      }
+      buildingType {
+        id
+        name
+      }
+      areaType {
+        id
+        name
+      }
+      shorelineType {
+        id
+        name
+      }
+      year
+      buildingCount
+      createdAt
+      updatedAt
+    }
+  }
+}
+`
