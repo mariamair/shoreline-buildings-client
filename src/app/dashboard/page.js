@@ -6,7 +6,7 @@
 
 import styles from './page.module.css'
 import { getBuildingCountEntities } from '@/lib/data'
-import RegionMap from './components/maps/RegionMap.js'
+import SwedenMap from './components/maps/SwedenMap.js'
 
 export default async function Dashboard() {
   const areaTypeTotal = 1
@@ -27,7 +27,7 @@ export default async function Dashboard() {
   return (
     <main className={styles.main}>
       <h1>Dashboard</h1>
-      <RegionMap data={buildingCountEntities.items} />
+      <SwedenMap data={buildingCountEntities.items} />
       <p>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
     </main>
   )
