@@ -13,7 +13,7 @@ export default function SwedenMap({ data }) {
 
   const mapData = data.map(item => ({ 
     name: item.region.name,
-    code: item.code,
+    code: item.region.code,
     value: item.buildingCount
   }))
 
