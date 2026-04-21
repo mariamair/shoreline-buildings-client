@@ -46,7 +46,7 @@ export default function RegionMap({ data }) {
           tooltip: {
             trigger: 'item',
             formatter: (params) =>
-              `${params.name}: ${params.value ?? 0} buildings`
+              `${params.name}: ${(params.value ?? 0).toLocaleString()} buildings`
           },
           visualMap: {
             min: 0,
