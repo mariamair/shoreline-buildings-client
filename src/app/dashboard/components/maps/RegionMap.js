@@ -11,9 +11,8 @@ import { useRouter } from 'next/navigation'
 
 export default function RegionMap({ data }) {
 
-  const mapData = data.map(item => ({ 
+  const mapData = data.items.map(item => ({ 
     name: item.region.name,
-    code: item.code,
     value: item.buildingCount
   }))
 
@@ -30,23 +29,34 @@ export default function RegionMap({ data }) {
     const chart = echarts.init(chartRef.current)
 
     // Load GeoJSON and register it with ECharts
-    fetch('/geodata/swedish_regions.geojson')
+    fetch('/geodata/swedish_municipalities.json')
       .then(res => res.json())
       .then(geoJson => {
-        echarts.registerMap('sweden', geoJson)
+        // Only display selected region
+        const filteredGeoJson = {
+          ...geoJson,
+          features: geoJson.features.filter(
+            f => f.properties.lan_code === data.regionCode
+          )
+        }
+        echarts.registerMap('region', filteredGeoJson)
 
         chart.setOption({
           title: {
-            text: 'Shoreline Buildings per Region',
-            left: 'center',
+            text: 'Shoreline Buildings in Region',
+            left: 'left',
             textStyle: {
               color: getCssVar('--text-primary')
             }
           },
           tooltip: {
             trigger: 'item',
-            formatter: (params) =>
-              `${params.name}: ${(params.value ?? 0).toLocaleString()} buildings`
+            formatter: (params) => `
+              <div>
+              <strong>${params.name}</strong><br/>
+              ${(params.value ?? 0).toLocaleString()} buildings
+              </div>
+            `
           },
           visualMap: {
             min: 0,
@@ -67,7 +77,7 @@ export default function RegionMap({ data }) {
           },
           series: [{
             type: 'map',
-            map: 'sweden',
+            map: 'region',
             roam: true,          // Enable zoom and pan
             emphasis: {
               label: { 
@@ -78,13 +88,6 @@ export default function RegionMap({ data }) {
             },
             data: mapData
           }]
-        })
-
-        // Click region to drill down
-        chart.on('click', (params) => {
-          if (params.name) {
-            router.push(`/dashboard/regions/${params.data.code}`)
-          }
         })
       })
 

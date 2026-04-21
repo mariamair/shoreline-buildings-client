@@ -38,15 +38,19 @@ export default function SwedenMap({ data }) {
         chart.setOption({
           title: {
             text: 'Shoreline Buildings per Region',
-            left: 'center',
+            left: 'left',
             textStyle: {
               color: getCssVar('--text-primary')
             }
           },
           tooltip: {
             trigger: 'item',
-            formatter: (params) =>
-              `${params.name}: ${(params.value ?? 0).toLocaleString()} buildings`
+            formatter: (params) => `
+              <div>
+              <strong>${params.name}</strong><br/>
+              ${(params.value ?? 0).toLocaleString()} buildings
+              </div>
+            `
           },
           visualMap: {
             min: 0,

@@ -7,6 +7,7 @@
 export const BUILDING_COUNT_QUERY = `
 query BuildingCountEntitiesWithFilters (
   $regionCode: String,
+  $parentRegionCode: String,
   $regionTypeId: Int,
   $year: Int,
   $areaTypeId: Int,
@@ -17,6 +18,7 @@ query BuildingCountEntitiesWithFilters (
   buildingCountEntities(
     filter: {
     regionCode: $regionCode,
+    parentRegionCode: $parentRegionCode,
     regionTypeId: $regionTypeId, 
     year: $year, 
     areaTypeId: $areaTypeId, 

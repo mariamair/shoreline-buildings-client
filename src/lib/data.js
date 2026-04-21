@@ -17,6 +17,10 @@ export async function getBuildingCountEntities(filter) {
     limit: filter.limit,
     offset: filter.offset
   }
+
+  if (filter.parentRegionCode) {
+    variables.parentRegionCode = filter.parentRegionCode
+  }
   
   try {
     const response = await fetch(`${queryUrl}`, {
