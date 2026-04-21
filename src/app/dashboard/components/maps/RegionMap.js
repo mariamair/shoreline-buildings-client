@@ -9,19 +9,10 @@ import { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { useRouter } from 'next/navigation'
 
-export default function RegionMap() {
+export default function RegionMap({ data }) {
 
-  const data = { items: [
-    { name: 'Stockholms län', code: '01', buildingCount: 5 },
-    { name: 'Kronobergs län', code: '07', buildingCount: 4 },
-    { name: 'Uppsala län', code: '03',  buildingCount: 3 },
-    { name: 'Västerbottens län', code: '24',  buildingCount: 3 },
-    { name: 'Norrbottens län', code: '25',  buildingCount: 1 },
-    { name: 'Örebro län', code: '18',  buildingCount: 0 }
-  ] }
-
-  const mapData = data.items.map(item => ({ 
-    name: item.name,
+  const mapData = data.map(item => ({ 
+    name: item.region.name,
     code: item.code,
     value: item.buildingCount
   }))
@@ -46,7 +37,7 @@ export default function RegionMap() {
 
         chart.setOption({
           title: {
-            text: 'Buildings per Region',
+            text: 'Shoreline Buildings per Region',
             left: 'center',
             textStyle: {
               color: getCssVar('--text-primary')
@@ -76,7 +67,10 @@ export default function RegionMap() {
             map: 'sweden',
             roam: true,          // Enable zoom and pan
             emphasis: {
-              label: { show: true },
+              label: { 
+                show: true,
+                color: getCssVar('--text-primary')
+              },
               itemStyle: { areaColor: getCssVar('--map-highlight') }  // Highlight region on hover
             },
             data: mapData

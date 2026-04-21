@@ -12,7 +12,7 @@
   --background-secondary: var(--color-secondary-light-green);
   --foreground: var(--color-secondary-white);
   --warning: var(--color-red);
-  --map-highlight: var(--color-apricot);
+  --map-highlight: var(--color-secondary-indigo);
   --map-range-low: var(--color-secondary-light-green);
   --map-range-high: var(--color-red);
 
