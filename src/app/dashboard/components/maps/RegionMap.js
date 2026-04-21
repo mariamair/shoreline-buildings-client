@@ -54,6 +54,9 @@ export default function RegionMap({ data }) {
             left: 'left',
             top: 'bottom',
             text: ['High', 'Low'],
+            textStyle: {
+              color: getCssVar('--text-primary')  // ← add this
+            },
             calculable: true,
             inRange: {
               color: [
