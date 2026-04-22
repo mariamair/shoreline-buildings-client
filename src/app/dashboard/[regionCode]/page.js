@@ -5,6 +5,7 @@
  */
 
 import styles from '../page.module.css'
+import Link from 'next/link'
 import { getBuildingCountEntities, getRegionName } from '@/lib/data'
 import RegionMap from '../components/maps/RegionMap.js'
 
@@ -12,7 +13,6 @@ export default async function RegionPage({ params }) {
   const { regionCode } = await params
 
   const { region: { name } }  = await getRegionName(regionCode)
-  console.log(name)
 
   const regionTypeMunicipality = 3
   const areaTypeTotal = 1
@@ -39,7 +39,12 @@ export default async function RegionPage({ params }) {
         regionCode={regionCode}
         regionName={name}
       />
-      <p>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
+      <div className={styles.links}>
+        <p>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
+        <Link href="/dashboard" className="btn-primary">
+          Back to Sweden map
+        </Link>
+      </div>
     </main>
   )
 }

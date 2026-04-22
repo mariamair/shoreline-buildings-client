@@ -61,12 +61,21 @@ a {
   color: var(--text-highlight);
 }
 
-button {
+button, .btn-primary {
   background: var(--button);
   color: var(--text-dark);
   font-size: 1rem;
-  padding: 0.2rem;
+  padding: 0.4rem;
   border-radius: 0.3rem;
+}
+
+.btn-primary {
+  text-decoration: none;
+}
+
+button:hover, .btn-primary:hover {
+  background-color: var(--color-secondary-indigo);
+  color: var(--text-primary);
 }
 
 .warning {
