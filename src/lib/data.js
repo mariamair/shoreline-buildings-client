@@ -4,10 +4,33 @@
  * @author Maria Mair <mm225mz@student.lnu.se>
  */
 
-import { BUILDING_COUNT_QUERY } from './queries'
+import { BUILDING_COUNT_QUERY, REGION_NAME_QUERY } from './queries'
+
+const queryUrl = process.env.QUERY_URL
+
+async function graphql(query, variables = {}) {
+  try {
+    const response = await fetch(queryUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query, variables }),
+      cache: 'force-cache'
+    })
+
+    const { data } = await response.json()
+
+    if (!response.ok) {
+      throw new Error(response)
+    }
+
+    return data
+
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export async function getBuildingCountEntities(filter) {
-  const queryUrl = process.env.QUERY_URL
   const variables = { 
     regionTypeId: filter.regionTypeId, 
     areaTypeId: filter.areaTypeId, 
@@ -22,24 +45,9 @@ export async function getBuildingCountEntities(filter) {
     variables.parentRegionCode = filter.parentRegionCode
   }
   
-  try {
-    const response = await fetch(`${queryUrl}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ query: BUILDING_COUNT_QUERY, variables })
-    })
+  return await graphql(BUILDING_COUNT_QUERY, variables)
+}
 
-    const { data } = await response.json()
-
-    if (!response.ok) {
-      throw new Error(response)
-    }
-
-    return data
-
-  } catch (error) {
-    console.log(error)
-  }
+export async function getRegionName(regionCode) {
+  return await graphql(REGION_NAME_QUERY, { regionCode })
 }

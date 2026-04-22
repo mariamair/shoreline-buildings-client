@@ -15,7 +15,7 @@ query BuildingCountEntitiesWithFilters (
   $shorelineTypeId: Int,
   $limit: Int,
   $offset: Int) {
-  buildingCountEntities(
+  buildingCountEntities (
     filter: {
     regionCode: $regionCode,
     parentRegionCode: $parentRegionCode,
@@ -59,6 +59,14 @@ query BuildingCountEntitiesWithFilters (
       createdAt
       updatedAt
     }
+  }
+}
+`
+
+export const REGION_NAME_QUERY = `
+query RegionName ($regionCode: String!) { 
+  region ( code: $regionCode) {
+    name
   }
 }
 `

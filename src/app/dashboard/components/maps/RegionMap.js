@@ -8,10 +8,11 @@
 import { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { useRouter } from 'next/navigation'
+import styles from './RegionMap.module.css'
 
-export default function RegionMap({ data }) {
+export default function RegionMap({ data, regionCode, regionName }) {
 
-  const mapData = data.items.map(item => ({ 
+  const mapData = data.map(item => ({ 
     name: item.region.name,
     value: item.buildingCount
   }))
@@ -36,14 +37,14 @@ export default function RegionMap({ data }) {
         const filteredGeoJson = {
           ...geoJson,
           features: geoJson.features.filter(
-            f => f.properties.lan_code === data.regionCode
+            f => f.properties.lan_code === regionCode
           )
         }
         echarts.registerMap('region', filteredGeoJson)
 
         chart.setOption({
           title: {
-            text: 'Shoreline Buildings in Region',
+            text: `Shoreline Buildings in ${regionName}`,
             left: 'left',
             textStyle: {
               color: getCssVar('--text-primary')
@@ -98,7 +99,7 @@ export default function RegionMap({ data }) {
       window.removeEventListener('resize', handleResize)
       chart.dispose()
     }
-  }, [mapData, router])
+  }, [mapData, router, regionCode, regionName])
 
-  return <div ref={chartRef} style={{ width: '100%', height: '600px' }} />
+  return <div ref={chartRef}  className={styles.chart} style={{ width: '100%', height: '600px' }} />
 }
