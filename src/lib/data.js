@@ -26,7 +26,7 @@ async function graphql(query, variables = {}) {
     return data
 
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
