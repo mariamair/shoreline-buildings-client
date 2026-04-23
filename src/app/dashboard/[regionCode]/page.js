@@ -3,23 +3,26 @@
  * 
  * @author Maria Mair <mm225mz@student.lnu.se>
  */
+'use client'
 
-import styles from '../page.module.css'
-import Link from 'next/link'
-import { getBuildingCountEntities, getRegionName } from '@/lib/data'
+import { useState, useEffect, use } from 'react'
+import { fetchData, fetchRegionName } from '../actions.js'
+import SelectYear from '../components/SelectYear'
 import RegionMap from '../components/maps/RegionMap.js'
+import Link from 'next/link'
+import styles from '../page.module.css'
 
-export default async function RegionPage({ params }) {
-  const { regionCode } = await params
-
-  const { region: { name } }  = await getRegionName(regionCode)
+export default function RegionPage({ params }) {
+  // Asynchronous access of `params` to get region code
+  const { regionCode } = use(params)
+  const [regionName, setRegionName] = useState('')
 
   const regionTypeMunicipality = 3
   const areaTypeTotal = 1
   const buildingTypeTotal = 1
   const shorelineTypeTotal = 1
 
-  const filter = { 
+  const [filterValues, setFilterValues] = useState({ 
     parentRegionCode: regionCode,
     regionTypeId: regionTypeMunicipality, 
     areaTypeId: areaTypeTotal, 
@@ -27,22 +30,51 @@ export default async function RegionPage({ params }) {
     shorelineTypeId: shorelineTypeTotal, 
     year: 2018,
     limit: 50,
-    offset: 0 }
+    offset: 0 })
 
-  const { buildingCountEntities } = await getBuildingCountEntities(filter)
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const result = fetchRegionName(regionCode)
+    setRegionName(result)
+  }, [regionCode])
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true)
+      try {
+        const result = await fetchData(filterValues)
+        setData(result)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadData()
+  }, [filterValues])
 
   return (
     <main className={styles.main}>
       <h1>Dashboard</h1>
-      <RegionMap 
-        data={buildingCountEntities.items}
-        regionCode={regionCode}
-        regionName={name}
-      />
+      <h3>Shoreline Buildings in {regionName}</h3>
+      <div>
+        <SelectYear value={filterValues.year} onChange={(year) => setFilterValues({ ...filterValues, year })} />
+      </div>
+      {loading && <p>Loading data...</p>}
+      {data && (
+        <RegionMap
+          data={data.buildingCountEntities.items}
+          regionCode={regionCode}
+          regionName={regionName}
+        />
+      )}
       <div className={styles.links}>
         <p>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
         <Link href="/dashboard" className="btn-primary">
-          Back to Sweden map
+            Back to Sweden map
         </Link>
       </div>
     </main>

@@ -13,11 +13,22 @@
   color: var(--text-highlight);
 }
 
+.main h3 {
+  line-height: 48px;
+  text-wrap: balance;
+}
+
 .main .links {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.dropdown label {
+  display: block;
+  color: var(--text-highlight);
+  padding-bottom: 0.3rem;
 }
 
 @media (max-width: 600px) {

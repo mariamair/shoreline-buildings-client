@@ -10,8 +10,7 @@ import * as echarts from 'echarts'
 import { useRouter } from 'next/navigation'
 import styles from './RegionMap.module.css'
 
-export default function RegionMap({ data, regionCode, regionName }) {
-
+export default function RegionMap({ data, regionCode }) {
   const mapData = data.map(item => ({ 
     name: item.region.name,
     value: item.buildingCount
@@ -43,13 +42,6 @@ export default function RegionMap({ data, regionCode, regionName }) {
         echarts.registerMap('region', filteredGeoJson)
 
         chart.setOption({
-          title: {
-            text: `Shoreline Buildings in ${regionName}`,
-            left: 'left',
-            textStyle: {
-              color: getCssVar('--text-primary')
-            }
-          },
           tooltip: {
             trigger: 'item',
             formatter: (params) => `
@@ -99,7 +91,7 @@ export default function RegionMap({ data, regionCode, regionName }) {
       window.removeEventListener('resize', handleResize)
       chart.dispose()
     }
-  }, [mapData, router, regionCode, regionName])
+  }, [mapData, router, regionCode])
 
   return <div ref={chartRef}  className={styles.chart} style={{ width: '100%', height: '600px' }} />
 }

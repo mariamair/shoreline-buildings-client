@@ -78,6 +78,10 @@ button:hover, .btn-primary:hover {
   color: var(--text-primary);
 }
 
+select {
+  padding: 0.3rem;
+}
+
 .warning {
   color: var(--warning);
 }
