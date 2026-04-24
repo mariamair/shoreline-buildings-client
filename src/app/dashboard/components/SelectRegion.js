@@ -23,8 +23,6 @@ export default function SelectRegion({ value }) {
         // Sort regions by name
         const sorted = result.sort((a, b) => a.name.localeCompare(b.name))
         setRegions(sorted)
-        
-        console.log(result)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
