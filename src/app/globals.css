@@ -61,12 +61,13 @@ a {
   color: var(--text-highlight);
 }
 
-button, .btn-primary {
+button {
   background: var(--button);
   color: var(--text-dark);
   font-size: 1rem;
-  padding: 0.4rem;
+  padding: 0.4rem 0.6rem;
   border-radius: 0.3rem;
+  border: none;
 }
 
 .btn-primary {

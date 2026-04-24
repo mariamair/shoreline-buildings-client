@@ -16,6 +16,7 @@
 .main h3 {
   line-height: 48px;
   text-wrap: balance;
+  margin-bottom: 0.8rem;
 }
 
 .main .links {
@@ -38,6 +39,12 @@
   padding-bottom: 0.3rem;
 }
 
+.mapInfo {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.8rem;
+}
+
 @media (max-width: 600px) {
   .main {
     padding: 16px;
@@ -49,7 +56,15 @@
     letter-spacing: -1.92px;
   }
 
+  .main h3 {
+    line-height: 32px;
+  }
+
   .filter {
     flex-direction: column;
+  }
+
+  .mapInfo {
+    max-width: 320px;
   }
 }

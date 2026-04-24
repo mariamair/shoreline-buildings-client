@@ -81,9 +81,7 @@ export default function RegionPage({ params }) {
           regionName={regionName}
         />
       )}
-      <div className={styles.links}>
-        <p>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
-      </div>
+      <p className={styles.mapInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
     </main>
   )
 }
