@@ -7,7 +7,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { getBuildingCountEntities, getRegionName } from '@/lib/data'
+import { getBuildingCountEntities, getRegionName, getRegions } from '@/lib/data'
 
 export async function fetchData(filter) {
   // Revalidate to refresh the dashboard
@@ -20,4 +20,9 @@ export async function fetchData(filter) {
 export async function fetchRegionName(regionCode) {
   const { region: { name } }  = await getRegionName(regionCode)
   return name
+}
+
+export async function fetchRegions(regionTypeId) {
+  const { regions: { items } }  = await getRegions(regionTypeId)
+  return items
 }
