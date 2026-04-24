@@ -65,8 +65,19 @@ query BuildingCountEntitiesWithFilters (
 
 export const REGION_NAME_QUERY = `
 query RegionName ($regionCode: String!) { 
-  region ( code: $regionCode) {
+  region (code: $regionCode) {
     name
+  }
+}
+`
+
+export const REGIONS_QUERY = `
+query Regions ($regionTypeId: Int!) { 
+  regions (regionTypeId: $regionTypeId) {
+    items {
+      code
+      name
+    }
   }
 }
 `

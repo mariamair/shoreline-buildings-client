@@ -4,7 +4,7 @@
  * @author Maria Mair <mm225mz@student.lnu.se>
  */
 
-import { BUILDING_COUNT_QUERY, REGION_NAME_QUERY } from './queries'
+import { BUILDING_COUNT_QUERY, REGION_NAME_QUERY, REGIONS_QUERY } from './queries'
 
 const queryUrl = process.env.QUERY_URL
 
@@ -51,3 +51,7 @@ export async function getBuildingCountEntities(filter) {
 export async function getRegionName(regionCode) {
   return await graphql(REGION_NAME_QUERY, { regionCode })
 }
+
+export async function getRegions(regionTypeId) {
+  return await graphql(REGIONS_QUERY, { regionTypeId })
+} 

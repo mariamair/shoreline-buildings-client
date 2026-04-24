@@ -7,8 +7,9 @@
 
 import { useState, useEffect, use } from 'react'
 import { fetchData, fetchRegionName } from '../actions.js'
-import SelectYear from '../components/SelectYear'
 import SelectAreaType from '../components/SelectAreaType.js'
+import SelectRegion from '../components/SelectRegion.js'
+import SelectYear from '../components/SelectYear'
 import RegionMap from '../components/maps/RegionMap.js'
 import Link from 'next/link'
 import styles from '../page.module.css'
@@ -62,6 +63,9 @@ export default function RegionPage({ params }) {
       <h1>Dashboard</h1>
       <h3>Shoreline Buildings in {regionName}</h3>
       <div className={styles.filter}>
+        <SelectRegion 
+          value={filterValues.parentRegionCode} 
+          onChange={(parentRegionCode) => setFilterValues({ ...filterValues, parentRegionCode })} />
         <SelectYear 
           value={filterValues.year} 
           onChange={(year) => setFilterValues({ ...filterValues, year })} />
@@ -69,6 +73,9 @@ export default function RegionPage({ params }) {
           value={filterValues.areaTypeId} 
           onChange={(areaTypeId) => setFilterValues({ ...filterValues, areaTypeId })} />
       </div>
+      <Link href="/dashboard" className="btn-primary">
+            Back to Sweden map
+      </Link>
       {loading && <p>Loading data...</p>}
       {data && (
         <RegionMap
@@ -79,9 +86,6 @@ export default function RegionPage({ params }) {
       )}
       <div className={styles.links}>
         <p>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
-        <Link href="/dashboard" className="btn-primary">
-            Back to Sweden map
-        </Link>
       </div>
     </main>
   )
