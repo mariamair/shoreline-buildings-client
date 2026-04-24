@@ -4,32 +4,55 @@
  * @author Maria Mair <mm225mz@student.lnu.se>
  */
 
-import styles from './page.module.css'
-import { getBuildingCountEntities } from '@/lib/data'
+'use client'
+
+import { useContext, useEffect, useState } from 'react'
+import { FilterContext } from './context/FilterContext'
+import { fetchData } from './actions.js'
+import SelectAreaType from './components/SelectAreaType.js'
+import SelectYear from './components/SelectYear'
 import SwedenMap from './components/maps/SwedenMap.js'
+import styles from './page.module.css'
 
-export default async function Dashboard() {
-  const regionTypeRegion = 2
-  const areaTypeTotal = 1
-  const buildingTypeTotal = 1
-  const shorelineTypeTotal = 1
+export default function Dashboard() {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  const filter = { 
-    regionTypeId: regionTypeRegion, 
-    areaTypeId: areaTypeTotal, 
-    buildingTypeId: buildingTypeTotal,
-    shorelineTypeId: shorelineTypeTotal, 
-    year: 2018,
-    limit: 21,
-    offset: 0 }
+  // Get filter values from context
+  const { filterValues, setFilterValues } = useContext(FilterContext)
 
-  const { buildingCountEntities } = await getBuildingCountEntities(filter)
+  // const { buildingCountEntities } = await getBuildingCountEntities(filter)
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true)
+      try {
+        const result = await fetchData(filterValues)
+        setData(result)
+      } catch (error) {
+        console.error('Error:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadData()
+  }, [filterValues])
+
 
   return (
     <main className={styles.main}>
       <h1>Dashboard</h1>
       <h3>Shoreline Buildings per Region</h3>
-      <SwedenMap data={buildingCountEntities.items} />
+      <div className={styles.filter}>
+        <SelectYear 
+          value={filterValues.year} 
+          onChange={(year) => setFilterValues({ ...filterValues, year })} />
+        <SelectAreaType 
+          value={filterValues.areaTypeId} 
+          onChange={(areaTypeId) => setFilterValues({ ...filterValues, areaTypeId })} />
+      </div>
+      {loading && <p>Loading...</p>}
+      {data && <SwedenMap data={data.buildingCountEntities.items} filterValues={filterValues} />}
       <p className={styles.mapInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
     </main>
   )

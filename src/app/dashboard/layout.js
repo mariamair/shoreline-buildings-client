@@ -6,6 +6,7 @@
 
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
+import { FilterProvider } from './context/FilterContext'
 import Header from './components/Header'
 
 export default async function DashboardLayout({ children }) {
@@ -18,7 +19,9 @@ export default async function DashboardLayout({ children }) {
     <div>
       <Header />
       <main>
-        {children}
+        <FilterProvider>
+          {children}
+        </FilterProvider>
       </main>
     </div>
   )
