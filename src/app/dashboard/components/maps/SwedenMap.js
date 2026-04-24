@@ -37,13 +37,6 @@ export default function SwedenMap({ data }) {
         echarts.registerMap('sweden', geoJson)
 
         chart.setOption({
-          title: {
-            text: 'Shoreline Buildings per Region',
-            left: 'left',
-            textStyle: {
-              color: getCssVar('--text-primary')
-            }
-          },
           tooltip: {
             trigger: 'item',
             formatter: (params) => `

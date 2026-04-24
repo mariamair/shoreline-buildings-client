@@ -28,6 +28,7 @@ export default async function Dashboard() {
   return (
     <main className={styles.main}>
       <h1>Dashboard</h1>
+      <h3>Shoreline Buildings per Region</h3>
       <SwedenMap data={buildingCountEntities.items} />
       <p className={styles.mapInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
     </main>
