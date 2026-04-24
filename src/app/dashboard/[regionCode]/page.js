@@ -11,7 +11,6 @@ import SelectAreaType from '../components/SelectAreaType.js'
 import SelectRegion from '../components/SelectRegion.js'
 import SelectYear from '../components/SelectYear'
 import RegionMap from '../components/maps/RegionMap.js'
-import Link from 'next/link'
 import styles from '../page.module.css'
 
 export default function RegionPage({ params }) {
@@ -73,9 +72,6 @@ export default function RegionPage({ params }) {
           value={filterValues.areaTypeId} 
           onChange={(areaTypeId) => setFilterValues({ ...filterValues, areaTypeId })} />
       </div>
-      <Link href="/dashboard" className="btn-primary">
-            Back to Sweden map
-      </Link>
       {loading && <p>Loading data...</p>}
       {data && (
         <RegionMap

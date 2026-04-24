@@ -15,7 +15,7 @@ export default async function Header() {
   return (
     <header className={styles.header}>
       <nav>
-        <Link href="/dashboard">Home</Link>
+        <Link href="/dashboard">Sweden</Link>
         <div className={styles.user}>
           <span>User: {session.user.name}</span>
           <SignOutButton />

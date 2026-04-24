@@ -1,5 +1,5 @@
 .header {
-  padding: 0.5rem;
+  padding: 8px 24px;
   background-color: var(--color-secondary-olive-green);
   color: var(--text-primary);
 }
@@ -17,4 +17,11 @@
   align-items: center;
   gap: 0.7rem;
   margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 16px;
+    flex-direction: column;
+  }
 }
