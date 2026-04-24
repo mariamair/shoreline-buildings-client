@@ -73,6 +73,14 @@ export default function SwedenMap({ data }) {
             type: 'map',
             map: 'sweden',
             roam: true,          // Enable zoom and pan
+            label: {
+              show: true,
+              formatter: function(params) {
+                return params.value.toLocaleString()
+              },
+              fontSize: 10,
+              color: getCssVar('--text-dark')
+            },
             emphasis: {
               label: { 
                 show: true,
