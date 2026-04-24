@@ -3,6 +3,7 @@
  *
  * @author Maria Mair <mm225mz@student.lnu.se>
  */
+
 'use client'
 
 import { useEffect, useRef } from 'react'

@@ -1,7 +1,9 @@
 /**
  * Defines the chart component.
  * 
- * Note: ECharts is client-side only and manipulates the DOM directly. Prerequisites: mark any component using ECharts with "use client" and make sure it only renders in the browser.
+ * Note: ECharts is client-side only and manipulates the DOM directly. 
+ * Prerequisites: mark any component using ECharts with "use client" 
+ * and make sure it only renders in the browser.
  *
  * @author Maria Mair <mm225mz@student.lnu.se>
  */
