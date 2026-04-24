@@ -25,6 +25,12 @@
   align-items: center;
 }
 
+.filter {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+}
+
 .dropdown label {
   display: block;
   color: var(--text-highlight);
@@ -40,5 +46,9 @@
     font-size: 32px;
     line-height: 40px;
     letter-spacing: -1.92px;
+  }
+
+  .filter {
+    flex-direction: column;
   }
 }

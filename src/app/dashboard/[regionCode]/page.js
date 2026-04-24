@@ -8,12 +8,13 @@
 import { useState, useEffect, use } from 'react'
 import { fetchData, fetchRegionName } from '../actions.js'
 import SelectYear from '../components/SelectYear'
+import SelectAreaType from '../components/SelectAreaType.js'
 import RegionMap from '../components/maps/RegionMap.js'
 import Link from 'next/link'
 import styles from '../page.module.css'
 
 export default function RegionPage({ params }) {
-  // Asynchronous access of `params` to get region code
+  // Asynchronous access of `params` to get values selected in parent
   const { regionCode } = use(params)
   const [regionName, setRegionName] = useState('')
 
@@ -60,8 +61,13 @@ export default function RegionPage({ params }) {
     <main className={styles.main}>
       <h1>Dashboard</h1>
       <h3>Shoreline Buildings in {regionName}</h3>
-      <div>
-        <SelectYear value={filterValues.year} onChange={(year) => setFilterValues({ ...filterValues, year })} />
+      <div className={styles.filter}>
+        <SelectYear 
+          value={filterValues.year} 
+          onChange={(year) => setFilterValues({ ...filterValues, year })} />
+        <SelectAreaType 
+          value={filterValues.areaTypeId} 
+          onChange={(areaTypeId) => setFilterValues({ ...filterValues, areaTypeId })} />
       </div>
       {loading && <p>Loading data...</p>}
       {data && (
