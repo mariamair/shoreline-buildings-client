@@ -21,8 +21,6 @@ export default function Dashboard() {
   // Get filter values from context
   const { filterValues, setFilterValues } = useContext(FilterContext)
 
-  // const { buildingCountEntities } = await getBuildingCountEntities(filter)
-
   useEffect(() => {
     const loadData = async () => {
       setLoading(true)
