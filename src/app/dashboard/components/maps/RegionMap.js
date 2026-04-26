@@ -59,7 +59,7 @@ export default function RegionMap({ data, regionCode }) {
             top: 'bottom',
             text: ['High', 'Low'],
             textStyle: {
-              color: getCssVar('--text-primary')  // ← add this
+              color: getCssVar('--text-primary')
             },
             calculable: true,
             inRange: {

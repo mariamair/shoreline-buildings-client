@@ -1,5 +1,5 @@
 /**
- * Defines the area type selection list component.
+ * Defines the region selection list component.
  *
  * @author Maria Mair <mm225mz@student.lnu.se>
  */
