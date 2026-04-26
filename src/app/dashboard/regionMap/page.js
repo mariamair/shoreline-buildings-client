@@ -27,12 +27,12 @@ export default function RegionPage() {
 
   // Set region type and parent region
   const regionTypeMunicipality = 3
-  const regionCode = filterValues.parentRegionCode
+  filterValues.parentRegionCode = filterValues.parentRegionCode || '01'
   
   useEffect(() => {
-    const result = fetchRegionName(regionCode)
+    const result = fetchRegionName(filterValues.parentRegionCode)
     setRegionName(result)
-  }, [regionCode])
+  }, [filterValues.parentRegionCode])
 
   useEffect(() => {
     const loadData = async () => {
@@ -56,7 +56,6 @@ export default function RegionPage() {
   const handleRegionChange = (event) => {
     const selectedRegionCode = event.target.value
     setFilterValues({ ...filterValues, parentRegionCode: selectedRegionCode })
-    router.refresh
   }
 
   return (
@@ -78,7 +77,7 @@ export default function RegionPage() {
       {data && (
         <RegionMap
           data={data.buildingCountEntities.items}
-          regionCode={regionCode}
+          regionCode={filterValues.parentRegionCode}
           regionName={regionName}
         />
       )}
