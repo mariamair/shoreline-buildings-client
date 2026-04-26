@@ -7,6 +7,7 @@
 'use client'
 
 import { useContext, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { FilterContext } from './context/FilterContext'
 import { fetchData } from './actions.js'
 import SelectAreaType from './components/SelectAreaType.js'
@@ -15,6 +16,7 @@ import SwedenMap from './components/maps/SwedenMap.js'
 import styles from './page.module.css'
 
 export default function Dashboard() {
+  const router = useRouter()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -25,8 +27,14 @@ export default function Dashboard() {
     const loadData = async () => {
       setLoading(true)
       try {
+
+        // Reset filter values on site navigation
+        filterValues.regionTypeId = 2
+        delete filterValues.parentRegionCode
+
         const result = await fetchData(filterValues)
         setData(result)
+        router.refresh
       } catch (error) {
         console.error('Error:', error)
       } finally {
@@ -34,7 +42,7 @@ export default function Dashboard() {
       }
     }
     loadData()
-  }, [filterValues])
+  }, [filterValues, router.refresh])
 
 
   return (
@@ -49,7 +57,7 @@ export default function Dashboard() {
           value={filterValues.areaTypeId} 
           onChange={(areaTypeId) => setFilterValues({ ...filterValues, areaTypeId })} />
       </div>
-      {loading && <p>Loading...</p>}
+      {loading && <p className={styles.loading}>Loading data...</p>}
       {data && <SwedenMap data={data.buildingCountEntities.items} filterValues={filterValues} />}
       <p className={styles.mapInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
     </main>
