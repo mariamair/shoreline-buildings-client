@@ -7,12 +7,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import styles from '../page.module.css'
 import { fetchRegions } from '../actions'
 
-export default function SelectRegion({ value }) {
-  const router = useRouter()
+export default function SelectRegion({ value, onChange }) {
   const [regions, setRegions] = useState([])
   const regionTypeId = 2
 
@@ -31,16 +29,10 @@ export default function SelectRegion({ value }) {
     loadData()
   }, [regionTypeId])
 
-  const handleChange = (event) => {
-    const selectedRegionCode = event.target.value
-    // Navigate to the selected region page
-    router.push(`/dashboard/${selectedRegionCode}`)
-  }
-
   return (
     <div className={styles.dropdown}>
       <label>Region</label>
-      <select value={value} onChange={handleChange}>
+      <select value={value} onChange={onChange}>
         {regions.map((option) => (
           <option key={option.code} value={option.code}>
             {option.name}
