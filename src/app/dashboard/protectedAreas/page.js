@@ -60,6 +60,10 @@ export default function Numbers() {
     <main className={styles.main}>
       <h1>Dashboard</h1>
       <h3>Buildings in a protected area</h3>
+      <p className={styles.informationText}>
+        In national parks, nature reserves, nature conservation areas, 
+        forest biotope protection areas, and other biotope protection areas.
+      </p>
       <div className={styles.filter}>
         <SelectRegionType 
           value={filterValues.regionTypeId} 
@@ -75,6 +79,7 @@ export default function Numbers() {
       </div>
       {loading && <p className={styles.loading}>Loading data...</p>}
       {data && <BarChart data={data.buildingCountEntities.items} filterValues={filterValues} />}
+      <p className={styles.sourceInfo}>Data from <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__MI__MI0812__MI0812S/MI0812T01/">SCB (Statistics Sweden)</a></p>
     </main>
   )
 }

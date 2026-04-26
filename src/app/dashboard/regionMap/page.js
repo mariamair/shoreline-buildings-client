@@ -53,10 +53,8 @@ export default function RegionPage() {
   }, [filterValues, router.refresh])
 
   // Display the selected region
-  const handleRegionChange = (event) => {
-    const selectedRegionCode = event.target.value
-    setFilterValues({ ...filterValues, parentRegionCode: selectedRegionCode })
-  }
+  const handleRegionChange = (event) => setFilterValues({ ...filterValues, parentRegionCode: event.target.value })
+  
 
   return (
     <main className={styles.main}>
@@ -81,7 +79,8 @@ export default function RegionPage() {
           regionName={regionName}
         />
       )}
-      <p className={styles.mapInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
+      <p className={styles.sourceInfo}>Data from <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__MI__MI0812__MI0812S/MI0812T01/">SCB (Statistics Sweden)</a></p>
+      <p className={styles.sourceInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
     </main>
   )
 }

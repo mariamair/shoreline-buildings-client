@@ -66,7 +66,8 @@ export default function Dashboard() {
       {data && <SwedenMap 
         data={data.buildingCountEntities.items}filterValues={filterValues}
         onRegionClick={handleRegionClick} />}
-      <p className={styles.mapInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
+      <p className={styles.sourceInfo}>Data from <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__MI__MI0812__MI0812S/MI0812T01/">SCB (Statistics Sweden)</a></p>
+      <p className={styles.sourceInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
     </main>
   )
 }
