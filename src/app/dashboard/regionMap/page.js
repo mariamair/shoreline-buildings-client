@@ -6,8 +6,9 @@
 
 'use client'
 
-import { useState, useEffect, use } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { FilterContext } from '../context/FilterContext'
 import { fetchData, fetchRegionName } from '../actions.js'
 import SelectAreaType from '../components/SelectAreaType.js'
 import SelectRegion from '../components/SelectRegion.js'
@@ -15,29 +16,19 @@ import SelectYear from '../components/SelectYear'
 import RegionMap from '../components/maps/RegionMap.js'
 import styles from '../page.module.css'
 
-export default function RegionPage({ params }) {
+export default function RegionPage() {
   const router = useRouter()
-  const { regionCode } = use(params)
-  const [regionName, setRegionName] = useState('')
-
-  const regionTypeMunicipality = 3
-  const areaTypeTotal = 1
-  const buildingTypeTotal = 1
-  const shorelineTypeTotal = 1
-
-  const [filterValues, setFilterValues] = useState({ 
-    parentRegionCode: regionCode,
-    regionTypeId: regionTypeMunicipality, 
-    areaTypeId: areaTypeTotal, 
-    buildingTypeId: buildingTypeTotal,
-    shorelineTypeId: shorelineTypeTotal, 
-    year: 2018,
-    limit: 50,
-    offset: 0 })
-
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [regionName, setRegionName] = useState('')
 
+  // Get filter values from context
+  const { filterValues, setFilterValues } = useContext(FilterContext)
+
+  // Set region type and parent region
+  const regionTypeMunicipality = 3
+  const regionCode = filterValues.parentRegionCode
+  
   useEffect(() => {
     const result = fetchRegionName(regionCode)
     setRegionName(result)
@@ -47,6 +38,7 @@ export default function RegionPage({ params }) {
     const loadData = async () => {
       setLoading(true)
       try {
+        filterValues.regionTypeId = regionTypeMunicipality
         const result = await fetchData(filterValues)
         setData(result)
         router.refresh
@@ -60,11 +52,11 @@ export default function RegionPage({ params }) {
     loadData()
   }, [filterValues, router.refresh])
 
-  // Navigate to the selected region page
+  // Display the selected region
   const handleRegionChange = (event) => {
     const selectedRegionCode = event.target.value
     setFilterValues({ ...filterValues, parentRegionCode: selectedRegionCode })
-    router.push(`/dashboard/${selectedRegionCode}`)
+    router.refresh
   }
 
   return (

@@ -21,7 +21,7 @@ export function FilterProvider({ children }) {
     buildingTypeId: buildingTypeTotal,
     shorelineTypeId: shorelineTypeTotal, 
     year: 2018,
-    limit: 21,
+    limit: 50,
     offset: 0
   })
 

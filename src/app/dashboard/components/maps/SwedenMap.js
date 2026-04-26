@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { useRouter } from 'next/navigation'
 
-export default function SwedenMap({ data }) {
+export default function SwedenMap({ data, onRegionClick }) {
 
   const mapData = data.map(item => ({ 
     name: item.region.name,
@@ -89,7 +89,7 @@ export default function SwedenMap({ data }) {
         // Click region to drill down
         chart.on('click', (params) => {
           if (params.name) {
-            router.push(`/dashboard/${params.data.code}`)
+            onRegionClick(params.data.code)
           }
         })
       })
@@ -101,7 +101,7 @@ export default function SwedenMap({ data }) {
       window.removeEventListener('resize', handleResize)
       chart.dispose()
     }
-  }, [mapData, router])
+  }, [mapData, router, onRegionClick])
 
   return <div ref={chartRef} style={{ width: '100%', height: '600px' }} />
 }

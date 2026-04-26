@@ -23,6 +23,11 @@ export default function Dashboard() {
   // Get filter values from context
   const { filterValues, setFilterValues } = useContext(FilterContext)
 
+  const handleRegionClick = (regionCode) => {
+    filterValues.parentRegionCode = regionCode
+    router.push('/dashboard/regionMap')
+  }
+
   useEffect(() => {
     const loadData = async () => {
       setLoading(true)
@@ -58,7 +63,9 @@ export default function Dashboard() {
           onChange={(areaTypeId) => setFilterValues({ ...filterValues, areaTypeId })} />
       </div>
       {loading && <p className={styles.loading}>Loading data...</p>}
-      {data && <SwedenMap data={data.buildingCountEntities.items} filterValues={filterValues} />}
+      {data && <SwedenMap 
+        data={data.buildingCountEntities.items}filterValues={filterValues}
+        onRegionClick={handleRegionClick} />}
       <p className={styles.mapInfo}>Map from <a href="https://github.com/okfse/sweden-geojson">https://github.com/okfse/sweden-geojson</a></p>
     </main>
   )
