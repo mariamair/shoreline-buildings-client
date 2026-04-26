@@ -7,6 +7,7 @@
 'use client'
 
 import { useState, useEffect, use } from 'react'
+import { useRouter } from 'next/navigation'
 import { fetchData, fetchRegionName } from '../actions.js'
 import SelectAreaType from '../components/SelectAreaType.js'
 import SelectRegion from '../components/SelectRegion.js'
@@ -15,7 +16,7 @@ import RegionMap from '../components/maps/RegionMap.js'
 import styles from '../page.module.css'
 
 export default function RegionPage({ params }) {
-  // Asynchronous access of `params` to get values selected in parent
+  const router = useRouter()
   const { regionCode } = use(params)
   const [regionName, setRegionName] = useState('')
 
@@ -48,6 +49,7 @@ export default function RegionPage({ params }) {
       try {
         const result = await fetchData(filterValues)
         setData(result)
+        router.refresh
       } catch (error) {
         console.error('Error fetching data:', error)
       } finally {
@@ -56,7 +58,14 @@ export default function RegionPage({ params }) {
     }
 
     loadData()
-  }, [filterValues])
+  }, [filterValues, router.refresh])
+
+  // Navigate to the selected region page
+  const handleRegionChange = (event) => {
+    const selectedRegionCode = event.target.value
+    setFilterValues({ ...filterValues, parentRegionCode: selectedRegionCode })
+    router.push(`/dashboard/${selectedRegionCode}`)
+  }
 
   return (
     <main className={styles.main}>
@@ -65,7 +74,7 @@ export default function RegionPage({ params }) {
       <div className={styles.filter}>
         <SelectRegion 
           value={filterValues.parentRegionCode} 
-          onChange={(parentRegionCode) => setFilterValues({ ...filterValues, parentRegionCode })} />
+          onChange={handleRegionChange} />
         <SelectYear 
           value={filterValues.year} 
           onChange={(year) => setFilterValues({ ...filterValues, year })} />
@@ -73,7 +82,7 @@ export default function RegionPage({ params }) {
           value={filterValues.areaTypeId} 
           onChange={(areaTypeId) => setFilterValues({ ...filterValues, areaTypeId })} />
       </div>
-      {loading && <p>Loading data...</p>}
+      {loading && <p className={styles.loading}>Loading data...</p>}
       {data && (
         <RegionMap
           data={data.buildingCountEntities.items}
