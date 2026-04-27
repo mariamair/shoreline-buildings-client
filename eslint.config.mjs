@@ -28,7 +28,8 @@ const eslintConfig = defineConfig([
           'code': 120,
           'ignoreComments': true,
           'ignoreUrls': true,
-          'ignorePattern': '^\\s*(query|mutation|fragment|gql)' 
+          'ignorePattern': '^\\s*(query|mutation|fragment|gql|<)',
+          'ignoreJSXExpressionContainers': true
         }],
       'max-params': ['warn', { 'max': 3 }],
       'object-curly-spacing': ['error', 'always'],

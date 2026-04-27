@@ -24,9 +24,7 @@
   --text-light-grey: var(--color-secondary-light-grey);
 
   --button: var(--color-secondary-light-grey);
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
+  --button-hover: var(--color-secondary-indigo);
 }
 
 html {
@@ -59,6 +57,13 @@ body {
 
 a {
   color: var(--text-highlight);
+  padding: 0.4rem;
+}
+
+a:hover {
+  background-color: var(--button-hover);
+  color: var(--text-primary);
+  padding: 0.4rem;
 }
 
 button {
@@ -70,12 +75,8 @@ button {
   border: none;
 }
 
-.btn-primary {
-  text-decoration: none;
-}
-
-button:hover, .btn-primary:hover {
-  background-color: var(--color-secondary-indigo);
+button:hover {
+  background-color: var(--button-hover);
   color: var(--text-primary);
 }
 
@@ -92,4 +93,15 @@ footer {
   color: var(--text-dark);
   text-align: center;
   padding: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  a {
+    padding: 0.1rem 0.3rem;
+  }
+
+  a:hover {
+    padding: 0.1rem 0.3rem;
+}
+
 }

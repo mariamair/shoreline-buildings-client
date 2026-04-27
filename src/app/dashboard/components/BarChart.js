@@ -29,12 +29,10 @@ export default function BarChart({ data }) {
 
     chart.setOption({
       backgroundColor: getCssVar('--color-secondary-white'), 
-      tooltip: {},
-      legend: {
-        data: ['Buildings'],
-        orient: 'vertical',
-        right: 10,
-        top: 10
+      tooltip: {
+        trigger: 'item',
+        formatter: (params) =>
+        `${params.seriesName}<br/>${params.marker}${params.name}: ${params.value.toLocaleString()}`
       },
       xAxis: {
         data: regionNames,
@@ -61,7 +59,7 @@ export default function BarChart({ data }) {
             show: true,
             color: getCssVar('--text-primary')
           },
-          itemStyle: { areaColor: getCssVar('--map-highlight') }  // Highlight on hover
+          itemStyle: { color: getCssVar('--map-highlight') }  // Highlight on hover
         }
       }],
       media: [{

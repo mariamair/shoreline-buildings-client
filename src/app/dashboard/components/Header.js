@@ -18,11 +18,11 @@ export default async function Header() {
         <Link href="/dashboard">Sweden</Link>
         <Link href="/dashboard/regionMap">Region Map</Link>
         <Link href="/dashboard/protectedAreas">Protected Areas</Link>
-        <div className={styles.user}>
-          <span>User: {session.user.name}</span>
-          <SignOutButton />
-        </div>
       </nav>
+      <div className={styles.user}>
+        <span>User: {session.user.name}</span>
+        <SignOutButton />
+      </div>
     </header>
   )
 }

@@ -54,6 +54,9 @@ export default function Dashboard() {
     <main className={styles.main}>
       <h1>Dashboard</h1>
       <h3>Shoreline Buildings per Region</h3>
+      <p className={styles.informationText}>
+        Number of buildings within 100 metres from a shoreline.
+      </p>
       <div className={styles.filter}>
         <SelectYear 
           value={filterValues.year} 

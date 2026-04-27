@@ -60,6 +60,9 @@ export default function RegionPage() {
     <main className={styles.main}>
       <h1>Dashboard</h1>
       <h3>Shoreline Buildings in {regionName}</h3>
+      <p className={styles.informationText}>
+        Number of buildings within 100 metres from a shoreline.
+      </p>
       <div className={styles.filter}>
         <SelectRegion 
           value={filterValues.parentRegionCode} 

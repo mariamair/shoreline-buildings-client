@@ -61,8 +61,7 @@ export default function Numbers() {
       <h1>Dashboard</h1>
       <h3>Buildings in a protected area</h3>
       <p className={styles.informationText}>
-        In national parks, nature reserves, nature conservation areas, 
-        forest biotope protection areas, and other biotope protection areas.
+        Number of buildings within 100 metres from a shoreline in national parks, nature reserves, nature conservation areas, forest biotope protection areas, and other biotope protection areas.
       </p>
       <div className={styles.filter}>
         <SelectRegionType 
